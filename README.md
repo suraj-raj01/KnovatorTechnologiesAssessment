@@ -61,12 +61,12 @@ Admin UI (Next.js)
 ---
 
 ## 📁 Project Structure
-
+```
 root
 │
 ├── server
 │   ├── config
-│   │   └── db.js
+│   │   ├── db.js
 │   │   └── redis.js
 │   │
 │   ├── cron
@@ -90,7 +90,7 @@ root
 │   │
 │   ├── server.js
 │   │
-│   ├── Dockerfile 
+│   ├── Dockerfile
 │   ├── .dockerignore
 │   └── .env
 │
@@ -103,7 +103,7 @@ root
 │   │
 │   ├── styles
 │   │
-│   ├── Dockerfile  
+│   ├── Dockerfile
 │   ├── .dockerignore
 │   └── .env.local
 │
@@ -115,6 +115,7 @@ root
 └── .gitignore
 
 
+```
 
 
 ---
