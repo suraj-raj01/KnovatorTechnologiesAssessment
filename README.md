@@ -4,6 +4,60 @@ A scalable, queue-based system for importing job listings from multiple external
 
 ---
 
+## 1️⃣ Clone the repository
+```bash
+mkdir project_name
+cd project_name
+git clone https://github.com/suraj-raj01/KnovatorTechnologiesAssessment
+```
+
+## Start All Servicess
+
+```bash
+docker-compose up --build
+
+```
+
+## Access the application
+
+| Service            | URL                                            |
+| ------------------ | ---------------------------------------------- |
+| Frontend (Next.js) | [http://localhost:3000](http://localhost:3000) |
+| Backend API        | [http://localhost:8000](http://localhost:8000) |
+| MongoDB            | localhost:27017                                |
+| Redis              | localhost:6379                                 |
+
+## Install dependencies
+### server
+```bash
+cd server
+npm install
+```
+
+### client
+```bash
+cd client
+npm install
+```
+
+
+## ⚙️ Environment Variables
+
+### Backend (`server/.env`)
+
+```env
+PORT=8000
+MONGO_URI=mongodb://localhost:27017/job_importer or mongoatlas cloud
+REDIS_URL=redis://127.0.0.1:6379 or redis cloud
+
+```
+
+### Frontend (client/.env.local)
+```env
+NEXT_PUBLIC_API_BASE_URL = http://localhost:8000
+
+```
+
 ## 🚀 Features
 
 - Import jobs from multiple external XML feeds
@@ -36,9 +90,10 @@ A scalable, queue-based system for importing job listings from multiple external
 
 ---
 
-## 🏗️ System Architecture
-
-High-level flow:
+## RUN COMMADS:
+backend : /server -> nodemon or node server.js
+frontend : /client -> npm run dev
+redis : docker run -d --name redis -p 6379:6379 redis  --> (DOCKER REQUIRED)
 
 
 ## API fetcher setup
@@ -61,7 +116,7 @@ Admin UI (Next.js)
 ---
 
 ## 📁 Project Structure
-```
+```bash
 root
 │
 ├── server
@@ -77,6 +132,7 @@ root
 │   │   └── ImportLog.js
 │   │
 │   ├── queues
+│   │   └── job.events.js       // using websocket (socket.io)
 │   │   └── job.queue.js
 │   │
 │   ├── workers
@@ -114,25 +170,4 @@ root
 ├── README.md
 └── .gitignore
 
-
 ```
-
-
----
-
-## ⚙️ Environment Variables
-
-### Backend (`server/.env`)
-
-```env
-PORT=8000
-MONGO_URI=mongodb://localhost:27017/job_importer or mongoatlas cloud
-REDIS_URL=redis://127.0.0.1:6379 or redis cloud
-
-```
-
-### Frontend (client/.env.local)
-```
-NEXT_PUBLIC_API_BASE_URL = http://localhost:8000
-```
-
