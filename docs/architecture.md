@@ -13,25 +13,50 @@ The architecture emphasizes:
 ---
 
 ## High-Level Architecture
+```scss
+┌────────────┐
+│   Cron     │
+│ (node-cron)│
+└─────┬──────┘
+      │
+      ▼
+┌───────────────┐
+│ Feed Fetcher  │
+│ (HTTP / RSS)  │
+└─────┬─────────┘
+      │
+      ▼
+┌────────────────────┐
+│ BullMQ Queue       │
+│ (Redis-backed)     │
+│  job-import        │
+└─────┬──────────────┘
+      │
+      ▼
+┌────────────────────┐
+│ Worker Processes   │
+│ (Concurrent)       │
+└─────┬──────────────┘
+      │
+      ▼
+┌────────────────────┐
+│ MongoDB            │
+│ Jobs + ImportLogs  │
+└─────┬──────────────┘
+      │
+      ▼
+┌────────────────────┐
+│ Socket.IO Server   │
+│ Real-time Events   │
+└─────┬──────────────┘
+      │
+      ▼
+┌────────────────────┐
+│ Next.js Frontend   │
+│ Live Status UI     │
+└────────────────────┘
 
-External Job APIs (XML)
-|
-| (Cron – scheduled fetch)
-v
-Job Fetch Service (XML → JSON)
-|
-v
-Redis Queue (BullMQ)
-|
-| (Worker processes, concurrency)
-v
-Job Processor
-|
-|-- MongoDB (jobs collection)
-|-- MongoDB (import_logs collection)
-v
-Admin UI (Next.js)
-
+```
 
 
 ---
